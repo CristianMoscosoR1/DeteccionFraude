@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detección de Fraude en Transacciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #2c3e50;
+        }
+        h2 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li::before {
+            content: '✅ ';
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Detección de Fraude en Transacciones Bancarias</h2>
+        
+        <h3>Problema a Resolver</h3>
+        <p>Los bancos y empresas financieras manejan millones de transacciones diarias, y algunas de estas pueden ser fraudulentas. 
+            El desafío es detectar fraudes en tiempo real para evitar pérdidas económicas y proteger a los clientes.</p>
+        
+        <h3>Enfoque con Aprendizaje Supervisado</h3>
+        <p>Se entrena un modelo de clasificación con datos históricos de transacciones, donde cada una está etiquetada como "fraudulenta" o "legítima".</p>
+        
+        <h3>1. Recolección de Datos</h3>
+        <p>Se obtiene un conjunto de datos con información sobre transacciones anteriores, incluyendo:</p>
+        <ul>
+            <li>Monto de la transacción</li>
+            <li>Ubicación del usuario</li>
+            <li>Hora y fecha de la transacción</li>
+            <li>Historial de compras del usuario</li>
+            <li>Método de pago</li>
+            <li>Número de intentos fallidos de autenticación</li>
+            <li>Etiqueta (fraudulenta o legítima)</li>
+        </ul>
+        
+        <h3>Ejemplo de Datos</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Monto</th>
+                <th>Ubicación</th>
+                <th>Hora</th>
+                <th>Método de Pago</th>
+                <th>Intentos Fallidos</th>
+                <th>Etiqueta</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>$500</td>
+                <td>Bogotá</td>
+                <td>02:00 AM</td>
+                <td>Tarjeta de Crédito</td>
+                <td>3</td>
+                <td>Fraude</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>$20</td>
+                <td>Medellín</td>
+                <td>11:30 AM</td>
+                <td>Tarjeta de Débito</td>
+                <td>0</td>
+                <td>Legítima</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>$3000</td>
+                <td>Cali</td>
+                <td>04:45 AM</td>
+                <td>Transferencia</td>
+                <td>5</td>
+                <td>Fraude</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>$50</td>
+                <td>Bogotá</td>
+                <td>06:15 PM</td>
+                <td>Tarjeta de Débito</td>
+                <td>0</td>
+                <td>Legítima</td>
+            </tr>
+        </table>
+        
+        <h3>2. Preprocesamiento de Datos</h3>
+        <p>Antes de entrenar el modelo, los datos deben ser preparados:</p>
+        <ul>
+            <li>Limpieza: Eliminar datos inconsistentes o incompletos.</li>
+            <li>Normalización: Escalar valores para que estén en la misma escala (por ejemplo, montos de dinero).</li>
+            <li>Conversión de Datos Categóricos: Convertir variables como "Ubicación" en valores numéricos mediante one-hot encoding.</li>
+            <li>Balanceo de Clases: Si hay muchas más transacciones legítimas que fraudulentas, se pueden aplicar técnicas como sobremuestreo o submuestreo para evitar sesgo en el modelo.</li>
+        </ul>
+    </div>
+</body>
+</html>
