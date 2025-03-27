@@ -36,6 +36,10 @@ def hello_there(name):
 def indexHTML():
     return render_template("index.html")
 
+@app.route("/mapaMental")
+def mapa_mental():
+    return render_template("mapaMental.html")
+
 
 
 @app.route("/Temperatura", methods=["GET", "POST"])
