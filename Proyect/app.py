@@ -40,7 +40,9 @@ def indexHTML():
 def mapa_mental():
     return render_template("mapaMental.html")
 
-
+@app.route("/regresionL")
+def regresionl():
+    return render_template("regresionL.html")
 
 @app.route("/Temperatura", methods=["GET", "POST"])
 def predict_consumption():
