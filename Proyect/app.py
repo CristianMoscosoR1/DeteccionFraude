@@ -21,8 +21,8 @@ def home():
 def hello_there(name):
     now = datetime.now()
 
-    match_object = re.match(" [a-zA-Z] +",name)
-
+    match_object = re.match("[a-zA-Z\s]+", name)
+    
     if match_object:
         clean_name = match_object.group(0)
     else: 
