@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import io
 import base64
 from sklearn.linear_model import LinearRegression
-from linealRegression601N import calculateConsumption
+from Proyect.linealRegression601N import calculateConsumption
 import joblib
 
 app = Flask (__name__)
