@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 import json
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -14,27 +16,30 @@ from sklearn.preprocessing import StandardScaler
 import os
 
 def cargaDatos():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     ruta1_json = "DatosRL/datos_ent.json"
     ruta1_json = os.path.join(os.path.dirname(__file__), "DatosRL/datos_ent.json")
 
     ruta2_json = "DatosRL/datos_test.json"
     ruta2_json = os.path.join(os.path.dirname(__file__), "DatosRL/datos_test.json")
 
+    if not os.path.exists(ruta1_json):
+        raise FileNotFoundError(f"No se encontró el archivo: {ruta1_json}")
+    if not os.path.exists(ruta2_json):
+        raise FileNotFoundError(f"No se encontró el archivo: {ruta2_json}")
+
     with open(ruta1_json, "r", encoding="utf-8") as file:
-        data = json.load(file)
-    df_train = pd.DataFrame(data)
+        df_train = pd.DataFrame(json.load(file))
 
     with open(ruta2_json, "r", encoding="utf-8") as file:
-        data = json.load(file)
-        
-    df_test = pd.DataFrame(data)
+        df_test = pd.DataFrame(json.load(file))
+
     df = pd.concat([df_train, df_test], ignore_index=True)
     return df
 
 def regresion_logisitica():
     df = cargaDatos()
 
-    # Variables
     X = df[['Edad', 'Tiempo_Permanencia', 'Dispositivo']]
     y = df['Click']
 
@@ -56,17 +61,15 @@ def regresion_logisitica():
     conf_mat = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(5, 4))
     sns.heatmap(conf_mat, annot=True, fmt='d', cmap='Blues')
-    plt.title("Matriz de Confusion")
-    plt.xlabel("Prediccion")
+    plt.title("Matriz de Confusión")
+    plt.xlabel("Predicción")
     plt.ylabel("Real")
 
-    # Convertir a imagen
     img = io.BytesIO()
     plt.savefig(img, format='png')
     img.seek(0)
     plot_url = base64.b64encode(img.getvalue()).decode()
     plt.close()
-
 
     result = {
         'accuracy': round(acc * 100, 2),
@@ -78,16 +81,24 @@ def regresion_logisitica():
 
 def prediccion(Edad, Tiempo_Permanencia, Dispositivo):
     df = cargaDatos()
+
     X = df[['Edad', 'Tiempo_Permanencia', 'Dispositivo']]
+    X = pd.get_dummies(X, columns=['Dispositivo'], drop_first=True)
+
+    dispositivo_col = 'Dispositivo_2'
+    input_dict = {
+        'Edad': Edad,
+        'Tiempo_Permanencia': Tiempo_Permanencia,
+        dispositivo_col: 1 if Dispositivo == 2 else 0
+    }
+    X_input = pd.DataFrame([input_dict])
 
     scaler = StandardScaler()
-    scaler.fit(X)
-
-    X_input = np.array([[Edad, Tiempo_Permanencia, Dispositivo]])
+    X_scaled = scaler.fit_transform(X)
     X_input_scaled = scaler.transform(X_input)
 
     model = LogisticRegression()
-    model.fit(scaler.transform(X), df['Click'])
+    model.fit(X_scaled, df['Click'])
 
     prediction = model.predict(X_input_scaled)[0]
     return prediction

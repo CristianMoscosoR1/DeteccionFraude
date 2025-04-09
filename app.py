@@ -9,6 +9,7 @@ from linealRegression601N import calculateConsumption
 from RL import regresion_logisitica, prediccion
 
 
+
 app = Flask (__name__)
 
 @app.route("/")
