@@ -1,0 +1,22 @@
+[
+    {"Edad": 26, "Dispositivo": 1, "Tiempo_Permanencia": 95, "Click": 1},
+    {"Edad": 28, "Dispositivo": 2, "Tiempo_Permanencia": 88, "Click": 1},
+    {"Edad": 31, "Dispositivo": 1, "Tiempo_Permanencia": 54, "Click": 1},
+    {"Edad": 43, "Dispositivo": 2, "Tiempo_Permanencia": 39, "Click": 2},
+    {"Edad": 22, "Dispositivo": 1, "Tiempo_Permanencia": 75, "Click": 1},
+    {"Edad": 25, "Dispositivo": 2, "Tiempo_Permanencia": 80, "Click": 1},
+    {"Edad": 36, "Dispositivo": 2, "Tiempo_Permanencia": 70, "Click": 2},
+    {"Edad": 48, "Dispositivo": 1, "Tiempo_Permanencia": 95, "Click": 2},
+    {"Edad": 40, "Dispositivo": 2, "Tiempo_Permanencia": 90, "Click": 1},
+    {"Edad": 27, "Dispositivo": 1, "Tiempo_Permanencia": 58, "Click": 1},
+    {"Edad": 34, "Dispositivo": 1, "Tiempo_Permanencia": 65, "Click": 1},
+    {"Edad": 30, "Dispositivo": 2, "Tiempo_Permanencia": 87, "Click": 2},
+    {"Edad": 45, "Dispositivo": 1, "Tiempo_Permanencia": 93, "Click": 2},
+    {"Edad": 32, "Dispositivo": 2, "Tiempo_Permanencia": 43, "Click": 1},
+    {"Edad": 20, "Dispositivo": 1, "Tiempo_Permanencia": 99, "Click": 1},
+    {"Edad": 24, "Dispositivo": 2, "Tiempo_Permanencia": 7, "Click": 2},
+    {"Edad": 39, "Dispositivo": 1, "Tiempo_Permanencia": 41, "Click": 1},
+    {"Edad": 50, "Dispositivo": 2, "Tiempo_Permanencia": 66, "Click": 2},
+    {"Edad": 19, "Dispositivo": 1, "Tiempo_Permanencia": 74, "Click": 1},
+    {"Edad": 21, "Dispositivo": 2, "Tiempo_Permanencia": 52, "Click": 1}
+  ]  
