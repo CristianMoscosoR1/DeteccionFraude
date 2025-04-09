@@ -5,9 +5,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+<<<<<<<< Updated upstream:app.py
+from linealRegression601N import calculateConsumption
+import joblib
+========
 from Proyect.linealRegression601N import calculateConsumption
 from Proyect.RL import regresion_logisitica, prediccion
 
+>>>>>>>> Stashed changes:Proyect/app.py
 
 app = Flask (__name__)
 
@@ -20,8 +25,8 @@ def home():
 def hello_there(name):
     now = datetime.now()
 
-    match_object = re.match("[a-zA-Z\s]+", name)
-    
+    match_object = re.match(" [a-zA-Z] +",name)
+
     if match_object:
         clean_name = match_object.group(0)
     else: 
@@ -39,6 +44,11 @@ def indexHTML():
 def mapa_mental():
     return render_template("mapaMental.html")
 
+<<<<<<<< Updated upstream:app.py
+
+
+========
+>>>>>>>> Stashed changes:Proyect/app.py
 @app.route("/Temperatura", methods=["GET", "POST"])
 def predict_consumption():
     predict_result = None
