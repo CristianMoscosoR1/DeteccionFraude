@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-from Proyect.linealRegression601N import calculateConsumption
-from Proyect.RL import regresion_logisitica, prediccion
+from linealRegression601N import calculateConsumption
+from RL import regresion_logisitica, prediccion
 
 
 app = Flask (__name__)
