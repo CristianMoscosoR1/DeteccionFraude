@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-from Proyect.linealRegression601N import calculateConsumption
-from Proyect.RL import regresion_logisitica, prediccion
+from linealRegression601N import calculateConsumption
+from RL import regresion_logisitica, prediccion
 
 
 app = Flask (__name__)
@@ -20,7 +20,7 @@ def home():
 def hello_there(name):
     now = datetime.now()
 
-    match_object = re.match("[a-zA-Z\s]+", name)
+    match_object = re.match("[a-zA-Z]+", name)
     
     if match_object:
         clean_name = match_object.group(0)
@@ -50,12 +50,16 @@ def predict_consumption():
 
 @app.route('/regresionL', methods=['GET', 'POST'])
 def regresionL():
-    prediction = None
     result, plot_url = regresion_logisitica()
+    prediction = None
 
     if request.method == 'POST':
-        Edad = float(request.form['Edad'])
-        Tiempo_Permanencia = float(request.form['Tiempo_Permanencia'])
-        Dispositivo = int(request.form['Dispositivo'])
-        prediction = prediccion(Edad, Tiempo_Permanencia, Dispositivo)
+        try:
+            Edad = float(request.form['Edad'])
+            Tiempo_Permanencia = float(request.form['Tiempo_Permanencia'])
+            Dispositivo = int(request.form['Dispositivo'])
+            prediction = prediccion(Edad, Tiempo_Permanencia, Dispositivo)
+        except Exception as e:
+            prediction = None  # o puedes guardar el error si quieres mostrarlo
+
     return render_template('regresionL.html', result=result, prediction=prediction, plot_url=plot_url)
