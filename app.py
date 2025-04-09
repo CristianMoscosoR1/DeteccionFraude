@@ -4,11 +4,10 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import io
-import base64
 from sklearn.linear_model import LinearRegression
 from linealRegression601N import calculateConsumption
-import joblib
+from RL import regresion_logisitica, prediccion
+
 
 app = Flask (__name__)
 
@@ -21,8 +20,8 @@ def home():
 def hello_there(name):
     now = datetime.now()
 
-    match_object = re.match(" [a-zA-Z] +",name)
-
+    match_object = re.match("[a-zA-Z\s]+", name)
+    
     if match_object:
         clean_name = match_object.group(0)
     else: 
@@ -40,8 +39,6 @@ def indexHTML():
 def mapa_mental():
     return render_template("mapaMental.html")
 
-
-
 @app.route("/Temperatura", methods=["GET", "POST"])
 def predict_consumption():
     predict_result = None
@@ -50,3 +47,15 @@ def predict_consumption():
         predict_result = calculateConsumption(temperature)
 
     return render_template("linearRegression.html", result=predict_result)
+
+@app.route('/regresionL', methods=['GET', 'POST'])
+def regresionL():
+    prediction = None
+    result, plot_url = regresion_logisitica()
+
+    if request.method == 'POST':
+        Edad = float(request.form['Edad'])
+        Tiempo_Permanencia = float(request.form['Tiempo_Permanencia'])
+        Dispositivo = int(request.form['Dispositivo'])
+        prediction = prediccion(Edad, Tiempo_Permanencia, Dispositivo)
+    return render_template('regresionL.html', result=result, prediction=prediction, plot_url=plot_url)
