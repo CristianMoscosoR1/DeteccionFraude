@@ -59,3 +59,48 @@ def regresionL():
         Dispositivo = int(request.form['Dispositivo'])
         prediction = prediccion(Edad, Tiempo_Permanencia, Dispositivo)
     return render_template('regresionL.html', result=result, prediction=prediction, plot_url=plot_url)
+
+@app.route("/prestamos")
+def prestamos_inicio():
+    return render_template("prestamos_inicio.html")
+
+@app.route("/prestamos/cargar", methods=["GET", "POST"])
+def cargar_datos():
+    global resultados_df
+    if request.method == "POST":
+        archivo = request.files["archivo"]
+        if archivo:
+            df = pd.read_excel(archivo)
+
+            columnas_esperadas = ['historial_crediticio', 'ingreso', 'deuda_actual']
+            if not all(col in df.columns for col in columnas_esperadas):
+                return "El archivo no contiene las columnas esperadas."
+
+            predicciones = modelo.predict(df[columnas_esperadas])
+            df["Resultado_Prediccion"] = predicciones
+            resultados_df = df
+
+            os.makedirs("static/resultados", exist_ok=True)
+            df.to_csv("static/resultados/resultados.csv", index=False)
+
+            return redirect("/prestamos/resultados")
+
+    return render_template("cargar_datos.html")
+
+
+@app.route("/prestamos/resultados")
+def mostrar_resultados():
+    global resultados_df
+    if not resultados_df.empty:
+        tabla_html = resultados_df.to_html(classes="table", index=False)
+        return render_template("resultados.html", tablas=[tabla_html])
+    else:
+        return render_template("resultados.html", tablas=None)
+
+@app.route("/prestamos/exportar")
+def exportar_csv():
+    archivo = "static/resultados/resultados.csv"
+    if os.path.exists(archivo):
+        return send_file(archivo, as_attachment=True)
+    else:
+        return "No hay archivo para exportar."
