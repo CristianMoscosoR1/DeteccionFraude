@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cargar Nuevos Datos</title>
+</head>
+<body>
+    <h2>Formulario para Cargar Nuevas Observaciones</h2>
+
+    <form action="/cargar_datos" method="POST" enctype="multipart/form-data">
+        <label for="archivo">Selecciona un archivo Excel (.xlsx):</label><br><br>
+        <input type="file" name="archivo" accept=".xlsx" required><br><br>
+        <input type="submit" value="Subir y Procesar">
+    </form>
+</body>
+</html>

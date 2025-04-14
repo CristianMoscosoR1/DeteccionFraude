@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Resultados{% endblock %}
+
+{% block content %}
+<h2>Resultados de Predicción</h2>
+
+{% if tablas %}
+    {{ tablas[0] | safe }}
+    <br>
+    <a href="/prestamos/exportar">Exportar a CSV</a>
+{% else %}
+    <p>No se han cargado datos aún.</p>
+{% endif %}
+
+{% endblock %}
