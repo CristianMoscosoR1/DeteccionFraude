@@ -7,12 +7,15 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from linealRegression601N import calculateConsumption
 from RL import regresion_logisitica, prediccion
+from Clasificacion import Bclasi, clasib, entreno
+from flask import send_file
+import os
+import joblib
+from sklearn.metrics import classification_report
 
-
-app = Flask (__name__)
+app = Flask(__name__)
 
 @app.route("/")
-
 def home():
     return render_template("mainpage.html")
 
@@ -25,9 +28,8 @@ def hello_there(name):
     if match_object:
         clean_name = match_object.group(0)
     else: 
-     clean_name = " friend"
+        clean_name = " friend"
 
-    
     content = "hello there, " + clean_name + "! hour: " + str(now)
     return content   
 
@@ -60,47 +62,43 @@ def regresionL():
         prediction = prediccion(Edad, Tiempo_Permanencia, Dispositivo)
     return render_template('regresionL.html', result=result, prediction=prediction, plot_url=plot_url)
 
-@app.route("/prestamos")
-def prestamos_inicio():
-    return render_template("prestamos_inicio.html")
+@app.route('/prestamos_inicio', methods=['GET', 'POST'])
+def clasificacion():
+    if request.method == 'POST':
+        archivo = request.files.get('archivo')
 
-@app.route("/prestamos/cargar", methods=["GET", "POST"])
-def cargar_datos():
-    global resultados_df
-    if request.method == "POST":
-        archivo = request.files["archivo"]
-        if archivo:
-            df = pd.read_excel(archivo)
+        if not archivo:
+            return "No se subió ningún archivo"
 
-            columnas_esperadas = ['historial_crediticio', 'ingreso', 'deuda_actual']
-            if not all(col in df.columns for col in columnas_esperadas):
-                return "El archivo no contiene las columnas esperadas."
+        try:
+            temp_path = "temp_upload.xlsx"
+            archivo.save(temp_path)
+            
+            resultado, error = Bclasi(temp_path)
+            
+            os.remove(temp_path)
+            
+            if error:
+                return error
+            
+            modelo, result, skaler = entreno()
+            
+            resultado.to_excel("ResultadoClasificacion.xlsx", index=False)
+            return render_template('resultados.html', result=result, tablas=[resultado.to_html(classes='data', index=False)])
+            
+        except Exception as e:
+            return f"Ocurrió un error: {str(e)}"
 
-            predicciones = modelo.predict(df[columnas_esperadas])
-            df["Resultado_Prediccion"] = predicciones
-            resultados_df = df
+    return render_template('prestamos_inicio.html')
 
-            os.makedirs("static/resultados", exist_ok=True)
-            df.to_csv("static/resultados/resultados.csv", index=False)
+@app.route('/descargar_resultados')
+def descargar_resultados():
+    ruta_resultado = os.path.join(os.path.dirname(__file__), 'ResultadoClasificacion.xlsx')
 
-            return redirect("/prestamos/resultados")
-
-    return render_template("cargar_datos.html")
-
-
-@app.route("/prestamos/resultados")
-def mostrar_resultados():
-    global resultados_df
-    if not resultados_df.empty:
-        tabla_html = resultados_df.to_html(classes="table", index=False)
-        return render_template("resultados.html", tablas=[tabla_html])
+    if os.path.exists(ruta_resultado):
+        return send_file(ruta_resultado, as_attachment=True)
     else:
-        return render_template("resultados.html", tablas=None)
+        return "El archivo de resultados no existe. Primero clasifica un archivo Excel."
 
-@app.route("/prestamos/exportar")
-def exportar_csv():
-    archivo = "static/resultados/resultados.csv"
-    if os.path.exists(archivo):
-        return send_file(archivo, as_attachment=True)
-    else:
-        return "No hay archivo para exportar."
+if __name__ == "__main__":
+    app.run(debug=True)

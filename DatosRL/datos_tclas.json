@@ -1,0 +1,23 @@
+[
+    {"historial_crediticio": 690, "ingreso": 340000, "deuda_actual": 60000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 480, "ingreso": 175000, "deuda_actual": 90000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 730, "ingreso": 390000, "deuda_actual": 50000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 310, "ingreso": 110000, "deuda_actual": 110000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 700, "ingreso": 370000, "deuda_actual": 55000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 460, "ingreso": 140000, "deuda_actual": 100000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 675, "ingreso": 320000, "deuda_actual": 65000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 520, "ingreso": 220000, "deuda_actual": 95000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 710, "ingreso": 360000, "deuda_actual": 40000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 630, "ingreso": 276000, "deuda_actual": 80000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 390, "ingreso": 138000, "deuda_actual": 1005000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 780, "ingreso": 450000, "deuda_actual": 30000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 470, "ingreso": 180000, "deuda_actual": 98000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 620, "ingreso": 260000, "deuda_actual": 77000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 350, "ingreso": 90500, "deuda_actual": 120000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 740, "ingreso": 410000, "deuda_actual": 45000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 510, "ingreso": 210000, "deuda_actual": 92000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 690, "ingreso": 340000, "deuda_actual": 61000, "prestamo_aprobado": 1},
+    {"historial_crediticio": 400, "ingreso": 120000, "deuda_actual": 99000, "prestamo_aprobado": 0},
+    {"historial_crediticio": 720, "ingreso": 400000, "deuda_actual": 50000, "prestamo_aprobado": 1}
+  ]
+  

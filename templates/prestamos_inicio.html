@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación de Datos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario para Clasificación</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="archivo">Subir archivo Excel:</label>
+            <input type="file" name="archivo" id="archivo">
+            <button type="submit">Clasificar</button>
+        </form>
+    </div>
+</body>
+</html>
